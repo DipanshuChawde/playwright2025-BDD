@@ -1,0 +1,107 @@
+🧪 Playwright installation ---------------------------------
+    🟩 Nodejs
+
+    📝 VS Code
+
+    📁 Create project folder → open in VSCode
+
+    💻 Install Playwright using terminal
+    npm init playwright@latest
+        📦 package.json → Node project management file
+        ⚙️ playwright.config.js → Playwright configuration
+        🧪 tests → We can run all the Playwright tests
+
+🔍 npm playwright -v → Returns installed version of Playwright
+
+🧩 Install Playwright using VS Code extension
+
+▶️ Run the Playwright test
+    npx playwright test
+    npx playwright test --headed
+    npx playwright show-report       
+
+✅ Playwright-BDD Installation & Setup Guide -------------------------------------------
+
+🧩 	Step 1: Install Required Libraries
+	1.	Run the following commands in your terminal:
+•	npm i -D playwright-bdd          
+ # BDD wrapper for Playwright
+•	npm i -D @cucumber/cucumber@latest  
+# Cucumber core library (used internally by playwright-bdd)
+
+	2.	Check package.json for both packages under devDependencies
+	3.	Optionally, install "Cucumber (Gherkin)" extension in VS Code for .feature file support.
+	
+🗂️	Step 2: Update playwright.config.js
+	1.	Import the BDD configuration helper:
+import { defineBddConfig } from 'playwright-bdd';
+
+	2.	Set your BDD test directories:
+const testDir = defineBddConfig({
+  paths: ['tests/features/*.feature'],       // Path to your .feature files
+  require: ['tests/steps/*.spec.js'],       // Path to your step definition files
+});
+
+	3.	Export the config:
+      Update the export section to use the BDD config:
+export default defineConfig({
+  ...testDir, // 👈 Use the BDD config instead of manually setting testDir
+  // You can also add more Playwright config options here
+});
+
+	
+🧪	Step 3: Write Your First Feature File
+	1.	Create a file: tests/features/myFirstBdd.feature
+
+Feature: Google Search
+Scenario: Search for Playwright
+Given I am on the Google search page
+When I search for "Playwright"
+Then I should see results
+
+	
+
+🧠	Step 4: Generate Step Template with bddgen
+	1.	Run the following command to auto-generate step templates:
+npx bddgen
+
+	2.	This will output sample code in the console.
+💡 Copy it into a file: tests/steps/myFirstBdd.steps.js
+
+	
+🧾	Step 5: Add Step Definitions
+	1.	In your step file (e.g., myFirstBdd.steps.js), use this base:
+
+import { expect } from '@playwright/test';
+import { createBdd } from 'playwright-bdd';
+const { Given, When, Then } = createBdd();
+
+Given('I am on the Google search page', async ({ page }) => {
+await page.goto('https://www.google.com');
+});
+
+When('I search for {string}', async ({ page }, searchTerm) => {
+await page locator('[name="q"]').fill(searchTerm);
+await page.keyboard.press('Enter');
+});
+
+Then('I should see results', async ({ page }) => {
+await page waitForSelector('#search');
+const results = await page.locator('#search .g').count();
+expect(results).toBeGreaterThan(O);
+
+});
+
+	
+▶️	Step 6: Run the BDD Test
+	1.	Run this command to execute the feature file using Playwright
+npx bddgen; npx playwright test 1.myFirstEx.feature --headed --project=chromium
+Or
+npx playwright test 1.myFirstEx.feature --headed --project=chromium
+
+	2.	Or simply run: 
+npx playwright test
+
+	
+🎉	You're Done!
+	You've now integrated BDD using playwright-bdd with Playwright’s native test runner.
