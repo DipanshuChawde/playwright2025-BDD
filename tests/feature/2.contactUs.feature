@@ -25,9 +25,9 @@ Feature: verify contact us page
     #     Then I click on submit button
     #     And I verify for validation message
 
-    Scenario Outline: Scenario Outline name: SC003-verify contact us page with valid data
+    Scenario Outline: SC003-verify contact us page with valid data
         Given I navigate to contact us page
-        When I enter information from data table3 <fn>,<ln>,<email>,"<msg>" 
+        When I enter information from data table3 <fn>,<ln>,"<email>","<msg>" 
         Then I click on submit button
         And I verify for validation message
         Examples:
@@ -35,19 +35,3 @@ Feature: verify contact us page
             | aditya   | masalkar | aditya@gmail.com   | i am learning java |
             | dipanshu | chawde   | dipanshu@gmail.com | hi                 |
 
-
-
-
-
-
-
-
-
-# Scenario: SC002-verify contact us page with valid data
-#     Given I navigate to contact us page
-#     When I enter information from data table2
-#         | fn       | ln       | email              | msg                |
-#         | aditya   | masalkar | aditya@gmail.com   | i am learning java |
-#         | dipanshu | chawde   | dipanshu@gmail.com | hi                 |
-#     Then I click on submit button
-#     And I verify for validation message

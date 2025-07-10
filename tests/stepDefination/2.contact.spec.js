@@ -15,6 +15,7 @@ When('I enter infomation', async ({ page }) => {
     await page.locator('[name="last_name"]').fill('chawde')
     await page.locator('[name="email"]').fill('dipanshu@gmail.com')
     await page.locator('[name="message"]').fill('i am learning playwright')
+    await page.waitForTimeout(3000)
 });
 
 Then('I click on submit button', async ({ page }) => {
@@ -40,6 +41,7 @@ When('I enter information from data table', async ({page}, dataTable) => {
     await page.locator('[name="last_name"]').fill(data.ln)
     await page.locator('[name="email"]').fill(data.email)
     await page.locator('[name="message"]').fill(data.msg)
+    await page.waitForTimeout(3000)
 });
 
 
@@ -51,52 +53,15 @@ When("I enter information from data table2",async({page},dataTable)=>{
     await page.locator('[name="last_name"]').fill(data[i][1])
     await page.locator('[name="email"]').fill(data[i][2])
     await page.locator('[name="message"]').fill(data[i][3])
+    await page.waitForTimeout(3000)
     }
 })
 
-When('I enter information from data table3 {word},{word},{word},{string}', async ({}, arg) => {
-  // Step: When I enter information from data table3 aditya,masalkar,aditya@gmail.com,"i am learning java"
-  // From: tests\feature\2.contactUs.feature:30:9
-});
+When("I enter information from data table3 {word},{word},{string},{string}",async({page},fn,ln,em,mg)=>{
+      await page.locator('[name="first_name"]').fill(fn)
+    await page.locator('[name="last_name"]').fill(ln)
+    await page.locator('[name="email"]').fill(em)
+    await page.locator('[name="message"]').fill(mg)
+    await page.waitForTimeout(3000)
+})
 
-
-// When("I enter information from data table3",async({page},dataTable)=>{
-//        console.log(dataTable)
-    
-//        // await page.locator('[name="first_name"]').fill(dataTable.fn)
-//     // await page.locator('[name="last_name"]').fill(data[i][1])
-//     // await page.locator('[name="email"]').fill(data[i][2])
-//     // await page.locator('[name="message"]').fill(data[i][3])
-//     await page.waitForTimeout(3000)
-   
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// When('I enter information from data table2', async ({page}, dataTable) => {
-//   // Step: When I enter information from data table
-//   // From: tests\feature\2.contactUs.feature:11:9
-//    const data = dataTable.rows();
-//    console.log(data)
-//    for(let el=0;el<data.length;el++){
-//     console.log(el)
-//     await page.locator('[name="first_name"]').fill(data[el][0])
-//     await page.locator('[name="last_name"]').fill(data[el][1])
-//     await page.locator('[name="email"]').fill(data[el][2])
-//     await page.locator('[name="message"]').fill(data[el][3])
-//     await page.waitForTimeout(2000)
-//    }
-// });
