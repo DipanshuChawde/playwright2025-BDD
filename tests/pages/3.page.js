@@ -1,4 +1,7 @@
 import { expect } from "@playwright/test";
+/**
+ * @param {Page} page
+ */
 
 exports.myClass = class myClass {
     constructor(page) {
@@ -18,14 +21,15 @@ exports.myClass = class myClass {
         await this.page.goto(url)
     }
     async clickLoginBtn() {
-        await this.page.click(this.loginCss)
-        await this.page.waitForTimeout(2000)
+        await this.page.locator(this.loginCss).click()
+        //await this.page.waitForTimeout(2000)
     }
     async login(un, pw) {
 
-        await this.page.fill(this.usernmCss, un)
-        await this.page.fill(this.pwCss, pw)
+        await this.page.locator(this.usernmCss).fill(un)
+        await this.page.locator(this.pwCss).fill(pw)
         await this.page.click(this.loginBtn)
+       // await this.page.waitForTimeout(2000)
     }
 
     async verifyUser(uid) {
